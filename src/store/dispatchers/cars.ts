@@ -6,7 +6,10 @@ import API from "../../lib/api"
 export const getCars = (type?: string) => (dispatch: Dispatch) => {
   dispatch(actions.getCarsRequest())
 
-  API.get(`${config.paths.cars}${type ? `?type=${type}` : ""}`)
+  API.post(config.paths.cars, {
+    BatchSize: 10,
+    From: 0
+  },{withCredentials: true})
     .then(({data}) => {
       if (data.isSuccess) {
         dispatch(actions.getCarsSuccess(data.cars))

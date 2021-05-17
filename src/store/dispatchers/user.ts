@@ -7,7 +7,7 @@ import {LoginFields, RegisterFields} from "../interfaces/user"
 export const register = (registerFields: RegisterFields) => (dispatch: Dispatch) => {
   dispatch(actions.registerRequest())
 
-  API.post(config.paths.register, {...registerFields})
+  API.post(config.paths.register, {...registerFields}, {withCredentials: true})
     .then(({data}) => {
       if (data.isSuccess) {
         dispatch(actions.registerSuccess(data))
@@ -21,7 +21,7 @@ export const register = (registerFields: RegisterFields) => (dispatch: Dispatch)
 export const login = (registerFields: LoginFields) => (dispatch: Dispatch) => {
   dispatch(actions.loginRequest())
 
-  API.post(config.paths.register, {...registerFields})
+  API.post(config.paths.login, {...registerFields})
     .then(({data}) => {
       if (data.isSuccess) {
         dispatch(actions.loginSuccess(data))

@@ -3,5 +3,10 @@
   grid-template-rows: repeat(6, 48px);
   grid-column-gap: 8px;
   width: 500px;
-  margin: 0 auto;
+  margin: 200px auto 0 auto;
+
+  .button {
+    margin: 24px auto 0 auto;
+    width: 50%;
+  }
 }

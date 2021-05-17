@@ -40,7 +40,7 @@ const Login = () => {
         password: event.target.value
       }))} type="password" label="Пароль"/>
 
-      <Button onClick={onClickHandler}>Войти</Button>
+      <Button className={style.button} onClick={onClickHandler}>Войти</Button>
     </div>
   )
 }
