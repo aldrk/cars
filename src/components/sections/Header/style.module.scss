@@ -1,0 +1,57 @@
+.header {
+  width: 100%;
+  height: 76px;
+  background-color: #b3d4fc;
+
+  .headerWrapper {
+    display: grid;
+    grid-template-columns: 386px 295px;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+
+    .menuWrapper {
+      display: grid;
+      grid-template-columns: 24px 62px 61px 47px;
+      grid-column-gap: 64px;
+      align-items: center;
+
+      & > a {
+        color: black;
+        text-decoration: none;
+
+        &:focus {
+          outline: none;
+        }
+
+        &:visited {
+          color: inherit;
+        }
+      }
+    }
+
+    .authActions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-column-gap: 32px;
+      justify-content: end;
+
+      & > a {
+        color: black;
+        text-decoration: none;
+
+        &:focus {
+          outline: none;
+        }
+
+        &:visited {
+          color: inherit;
+        }
+      }
+    }
+
+    .logOut {
+      text-align: end;
+    }
+  }
+}
