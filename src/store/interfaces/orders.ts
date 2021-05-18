@@ -18,5 +18,5 @@ export type OrdersResponse = {
 
 export type NewOrderFields = {
   CarId: number
-  SystemNumber: string
+
 }

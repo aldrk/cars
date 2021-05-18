@@ -109,7 +109,7 @@ const NewCar = () => {
       <TextField value={carFields.Count} onChange={(event => setCarFields({
         ...carFields,
         Count: +event.target.value
-      }))} label="Количесвто"/>
+      }))} label="Количество"/>
 
       <Button onClick={onClickHandler}>Создать</Button>
     </div>

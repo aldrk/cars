@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Button, Select, TextField, FormControl, InputLabel, MenuItem} from "@material-ui/core"
+import {Button, Select, FormControl, InputLabel, MenuItem} from "@material-ui/core"
 import { useHistory } from "react-router-dom"
 import API from "../../../../lib/api"
 import config from "../../../../config/config"
@@ -14,7 +14,6 @@ const newOrder = (newOrder: NewOrderFields) => {
   return new Promise<any>((resolve, reject) => {
     API.post(config.paths.order, {order: {...newOrder}}, {withCredentials: true})
       .then(({data}) => {
-        console.log(data, "func")
         if (data.isSuccess) {
           resolve(data)
         } else {
@@ -34,7 +33,6 @@ const NewOrder = () => {
 
   const [orderFields, setOrderFields] = useState<NewOrderFields>({
     CarId: 0,
-    SystemNumber: ""
   })
 
   const onClickHandler = () => {
@@ -49,11 +47,6 @@ const NewOrder = () => {
 
   return (
     <div className={style.formWrapper}>
-      <TextField value={orderFields.SystemNumber} onChange={(event => setOrderFields({
-        ...orderFields,
-        SystemNumber: event.target.value
-      }))} label="Системный номер"/>
-
       <FormControl>
         <InputLabel>Модель</InputLabel>
         <Select

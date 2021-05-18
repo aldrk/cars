@@ -14,11 +14,14 @@ const OrderCard: FC<Props> = ({order}) => {
   return (
     <Card className={style.root} variant="outlined">
       <CardContent>
-        <Typography className={style.title} color="textSecondary" gutterBottom>
-          {carModel} {systemNumber}
+        <Typography color="textSecondary" gutterBottom>
+          Модель: {carModel}
+        </Typography>
+        <Typography gutterBottom>
+          Номер: <span className={style.serialNumber}>{systemNumber}</span>
         </Typography>
         <Typography variant="body2" component="p">
-           Время покупки {dayjs(dateTime).format("DD.MM.YYYY")}
+           Время покупки: {dayjs(dateTime).format("DD.MM.YYYY")}
         </Typography>
       </CardContent>
     </Card>

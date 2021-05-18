@@ -3,7 +3,6 @@ import {Dispatch} from "redux"
 import API from "../../lib/api"
 import config from "../../config/config"
 import {LoginFields, RegisterFields} from "../interfaces/user"
-import {getOrders} from "./orders";
 
 export const register = (registerFields: RegisterFields) => (dispatch: Dispatch) => {
   dispatch(actions.registerRequest())
