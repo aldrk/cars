@@ -6,7 +6,8 @@ export default {
     cars: "/client/getautomodels",
     car: "/client/car",
     order: "/client/order",
-    orders: "/client/getclientinfo"
+    orders: "/client/getclientinfo",
+    statistic: "/client/getorderstatistic"
   },
 
   notificationDisappearTime: 5000

@@ -6,10 +6,10 @@ import Login from '../Login'
 import {useSelector} from "react-redux"
 import {State} from "../../../store/store"
 import Orders from '../Orders'
-import Users from '../Users'
 import Cars from "../Cars"
 import NewCar from "../Cars/NewCar";
-import NewOrder from "../Orders/NewOrder";
+import NewOrder from "../Orders/NewOrder"
+import Statistic from '../Statistic'
 
 const App = () => {
   const {isAuth, role} = useSelector((state: State) => state.user)
@@ -26,7 +26,7 @@ const App = () => {
         {!isAuth && <Route exact path="/login" component={Login}/>}
         {isAuth && <Route exact path="/cars" component={Cars}/>}
         {isAuth && isAdmin && <Route exact path="/cars/new" component={NewCar}/>}
-        {isAuth && isAdmin && <Route exact path="/clients" component={Users}/>}
+        {isAuth && isAdmin && <Route exact path="/statistic" component={Statistic}/>}
         {isAuth && !isAdmin && <Route exact path="/orders" component={Orders}/>}
         {isAuth && !isAdmin && <Route exact path="/orders/new" component={NewOrder}/>}
 
