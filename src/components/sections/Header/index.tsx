@@ -2,7 +2,7 @@ import React from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import {State} from "../../../store/store"
 import {Link} from "react-router-dom"
-import {logOut} from "../../../store/actions/user"
+import {logOut} from "../../../store/dispatchers/user"
 import Container from "../../blocks/Container"
 import Logo from "../../blocks/Logo"
 
@@ -11,11 +11,13 @@ import style from "./style.module.scss"
 const Header = () => {
   const dispatch = useDispatch()
 
-  const {isAuth} = useSelector((state: State) => state.user)
+  const {isAuth, role} = useSelector((state: State) => state.user)
 
   const onLogoutHandler = () => {
     dispatch(logOut())
   }
+
+  const isAdmin = role === "admin"
 
   return (
     <div className={style.header}>
@@ -25,8 +27,8 @@ const Header = () => {
             ? <div className={style.menuWrapper}>
                <Logo />
                 <Link to="/cars">Машины</Link>
-                <Link to="/clients">Клиенты</Link>
-                <Link to="/orders">Заказы</Link>
+                {isAdmin && <Link to="/clients">Клиенты</Link>}
+                {!isAdmin &&<Link to="/orders">Заказы</Link>}
 	             </div>
             : <Logo />
           }

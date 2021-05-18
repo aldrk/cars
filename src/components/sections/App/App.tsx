@@ -9,9 +9,14 @@ import Orders from '../Orders'
 import Users from '../Users'
 import Cars from "../Cars"
 import NewCar from "../Cars/NewCar";
+import NewOrder from "../Orders/NewOrder";
 
 const App = () => {
-  const {isAuth} = useSelector((state: State) => state.user)
+  const {isAuth, role} = useSelector((state: State) => state.user)
+
+  const isAdmin = role === "admin"
+
+  console.log(isAdmin)
 
   return (
     <div>
@@ -20,9 +25,10 @@ const App = () => {
         {!isAuth && <Route exact path="/register" component={Registration}/>}
         {!isAuth && <Route exact path="/login" component={Login}/>}
         {isAuth && <Route exact path="/cars" component={Cars}/>}
-        {isAuth && <Route exact path="/cars/new" component={NewCar}/>}
-        {isAuth && <Route exact path="/clients" component={Users}/>}
-        {isAuth && <Route exact path="/orders" component={Orders}/>}
+        {isAuth && isAdmin && <Route exact path="/cars/new" component={NewCar}/>}
+        {isAuth && isAdmin && <Route exact path="/clients" component={Users}/>}
+        {isAuth && !isAdmin && <Route exact path="/orders" component={Orders}/>}
+        {isAuth && !isAdmin && <Route exact path="/orders/new" component={NewOrder}/>}
 
         {!isAuth && <Route path="*" component={Registration}/>}
         {isAuth && <Redirect to="/cars" from="/"/>}

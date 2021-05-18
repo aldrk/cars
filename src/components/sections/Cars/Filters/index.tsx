@@ -2,6 +2,8 @@ import React, {FC} from "react"
 import {Button, FormControl, InputLabel, MenuItem, Select} from "@material-ui/core"
 import {useHistory} from "react-router-dom"
 import style from "../style.module.scss";
+import {useSelector} from "react-redux";
+import {State} from "../../../../store/store";
 
 type Props = {
   type: string
@@ -10,6 +12,10 @@ type Props = {
 
 const Filters: FC<Props> = ({type, setType}) => {
   const history = useHistory()
+
+  const {role} = useSelector((state: State) => state.user)
+
+  const isAdmin = role === "admin"
 
   const onClickHandler = () => {
     history.push("/cars/new")
@@ -31,7 +37,7 @@ const Filters: FC<Props> = ({type, setType}) => {
         </Select>
       </FormControl>
 
-      <Button onClick={onClickHandler}>Добавить машину</Button>
+      {isAdmin && <Button onClick={onClickHandler}>Добавить машину</Button>}
     </div>
   )
 }

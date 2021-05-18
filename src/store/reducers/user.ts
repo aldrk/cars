@@ -7,8 +7,9 @@ const defaultState: UserState = {
   middleName: "",
   lastName: "",
   login: "",
+  role: "user",
 
-  isAuth: true,
+  isAuth: false,
   isLoading: false
 }
 
@@ -59,10 +60,11 @@ const user = createReducer(
     [actions.loginSuccess.getType()](state, payload) {
       return {
         ...state,
-        firstName: payload.firstName,
-        middleName: payload.middleName,
-        lastName: payload.lastName,
+        firstName: payload.associate.firstName,
+        middleName: payload.associate.middleName,
+        lastName: payload.associate.lastName,
         login: payload.login,
+        role: payload.role.roleSystemName,
 
         isAuth: true,
         isLoading: true
@@ -72,6 +74,17 @@ const user = createReducer(
       return {
         ...state,
         isLoading: false
+      }
+    },
+    [actions.setUserData.getType()](state, payload) {
+      return {
+        ...state,
+        isLoading: false,
+        firstName: payload.data.client.firstName,
+        middleName: payload.data.client.middleName,
+        lastName: payload.data.client.lastName,
+        isAuth: true,
+        login: payload.login === "" ? state.login : payload.login
       }
     }
   }, defaultState)

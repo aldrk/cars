@@ -10,7 +10,10 @@ const List = () => {
 
   return (
     <div className={style.carsWrapper}>
-      {items.map(item => <CarCard key={item.id} car={item}/>)}
+      {items.length > 0
+        ?  items.map(item => <CarCard key={item.id} car={item}/>)
+        : "Нет авто в наличии"
+      }
     </div>
   )
 }

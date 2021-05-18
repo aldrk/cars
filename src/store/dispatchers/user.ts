@@ -3,6 +3,7 @@ import {Dispatch} from "redux"
 import API from "../../lib/api"
 import config from "../../config/config"
 import {LoginFields, RegisterFields} from "../interfaces/user"
+import {getOrders} from "./orders";
 
 export const register = (registerFields: RegisterFields) => (dispatch: Dispatch) => {
   dispatch(actions.registerRequest())
@@ -18,16 +19,32 @@ export const register = (registerFields: RegisterFields) => (dispatch: Dispatch)
     .catch(() => dispatch(actions.registerFailure()))
 }
 
-export const login = (registerFields: LoginFields) => (dispatch: Dispatch) => {
+export const login = (loginFields: LoginFields) => (dispatch: any) => {
   dispatch(actions.loginRequest())
 
-  API.post(config.paths.login, {...registerFields})
+  API.post(config.paths.login, {...loginFields}, {withCredentials: true})
     .then(({data}) => {
       if (data.isSuccess) {
         dispatch(actions.loginSuccess(data))
+      } else if (data.responseMessage === "Вы уже вошли в систему") {
+        dispatch(getOrders(loginFields.login))
       } else {
         dispatch(actions.loginFailure())
       }
     })
     .catch(() => dispatch(actions.loginFailure()))
+}
+
+export const logOut = () => (dispatch: Dispatch) => {
+  dispatch(actions.logOut())
+
+  API.post(config.paths.logOut,{} , {withCredentials: true})
+    .then(({data}) => {
+      if (data.isSuccess) {
+        dispatch(actions.logOut())
+      } else {
+        dispatch(actions.logOut())
+      }
+    })
+    .catch(() => dispatch(actions.logOut()))
 }

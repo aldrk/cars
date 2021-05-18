@@ -6,7 +6,7 @@ export type CarItem = {
   color: string,
   type: string,
   count: number,
-  img?: string
+  url: string
   engineVolume: string
 }
 
@@ -16,12 +16,12 @@ export type CarsState = {
 }
 
 export type NewCarFields = {
-  code: string,
-  brand: string,
-  model: string,
-  color: string,
-  type: string,
-  count: number,
-  img?: string
-  engineVolume: string
+  Code: string,
+  Brand: string,
+  Model: string,
+  Color: string,
+  Type: string,
+  Count: number,
+  Url: string
+  EngineVolume: string
 }

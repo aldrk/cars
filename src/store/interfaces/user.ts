@@ -5,6 +5,7 @@ export type UserState = {
   middleName: string
   lastName: string
   login: string
+  role: string
 }
 
 export type RegisterFields = {

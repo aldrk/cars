@@ -10,7 +10,7 @@ import style from "./style.module.scss"
 
 const newCar = (newCar: NewCarFields) => {
   return new Promise<void>((resolve, reject) => {
-    API.post(config.paths.car, {...newCar})
+    API.post(config.paths.car, {car: {...newCar, EngineVolume: +newCar.EngineVolume}}, {withCredentials: true})
       .then(({data}) => {
         if (data.isSucces) {
           resolve()
@@ -27,13 +27,14 @@ const NewCar = () => {
   const { addToast } = useToasts()
 
   const [carFields, setCarFields] = useState<NewCarFields>({
-    count: 0,
-    code: "",
-    brand: "",
-    model: "",
-    color: "",
-    type: "",
-    engineVolume: ""
+    Count: 0,
+    Code: "",
+    Brand: "",
+    Model: "",
+    Color: "",
+    Type: "",
+    Url: "",
+    EngineVolume: ""
   })
 
   const onClickHandler = () => {
@@ -48,23 +49,23 @@ const NewCar = () => {
 
   return (
     <div className={style.formWrapper}>
-      <TextField value={carFields.brand} onChange={(event => setCarFields({
+      <TextField value={carFields.Brand} onChange={(event => setCarFields({
         ...carFields,
-        brand: event.target.value
+        Brand: event.target.value
       }))} label="Бренд"/>
 
-      <TextField value={carFields.model} onChange={(event => setCarFields({
+      <TextField value={carFields.Model} onChange={(event => setCarFields({
         ...carFields,
-        model: event.target.value
+        Model: event.target.value
       }))} label="Модель"/>
 
       <FormControl>
         <InputLabel>Тип</InputLabel>
         <Select
-          value={carFields.type}
+          value={carFields.Type}
           onChange={(event: React.ChangeEvent<{ value: unknown }>) => setCarFields({
             ...carFields,
-            type: event.target.value as string
+            Type: event.target.value as string
           })}
         >
           <MenuItem value="Купе">Купе</MenuItem>
@@ -73,29 +74,29 @@ const NewCar = () => {
         </Select>
       </FormControl>
 
-      <TextField value={carFields.code} onChange={(event => setCarFields({
+      <TextField value={carFields.Code} onChange={(event => setCarFields({
         ...carFields,
-        code: event.target.value
+        Code: event.target.value
       }))} label="Код автомобиля"/>
 
-      <TextField value={carFields.color} onChange={(event => setCarFields({
+      <TextField value={carFields.Color} onChange={(event => setCarFields({
         ...carFields,
-        color: event.target.value
+        Color: event.target.value
       }))} label="Цвет"/>
 
-      <TextField value={carFields.color} onChange={(event => setCarFields({
+      <TextField value={carFields.Url} onChange={(event => setCarFields({
         ...carFields,
-        color: event.target.value
-      }))} label="Цвет"/>
+        Url: event.target.value
+      }))} label="Картинка"/>
 
-      <TextField value={carFields.engineVolume} onChange={(event => setCarFields({
+      <TextField value={carFields.EngineVolume} onChange={(event => setCarFields({
         ...carFields,
-        engineVolume: event.target.value
+        EngineVolume: event.target.value
       }))} label="Объем двигателя"/>
 
-      <TextField value={carFields.count} onChange={(event => setCarFields({
+      <TextField value={carFields.Count} onChange={(event => setCarFields({
         ...carFields,
-        count: +event.target.value
+        Count: +event.target.value
       }))} label="Количесвто"/>
 
       <Button onClick={onClickHandler}>Создать</Button>

@@ -9,14 +9,14 @@ type Props = {
 }
 
 const CarCard: FC<Props> = ({car}) => {
-  const {type, model, engineVolume, color, code, brand, count} = car
+  const {type, model, engineVolume, color, code, brand, count, url} = car
 
   return (
     <Card className={style.root} variant="outlined">
       <CardContent>
         <CardMedia
           className={style.media}
-          image="https://images.drive.ru/i/0/5e1849c3ec05c4302e0000ac.jpg"
+          image={url}
           title="Car image"
         />
         <Typography className={style.title} color="textSecondary" gutterBottom>
