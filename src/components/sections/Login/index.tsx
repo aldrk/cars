@@ -5,10 +5,8 @@ import {useDispatch, useSelector} from "react-redux"
 import { login } from '../../../store/dispatchers/user'
 import {State} from "../../../store/store"
 import { useHistory } from "react-router-dom"
-import Cookies from 'universal-cookie'
-import style from "./style.module.scss"
 
-const cookies = new Cookies()
+import style from "./style.module.scss"
 
 const Login = () => {
   const dispatch = useDispatch()
@@ -25,7 +23,7 @@ const Login = () => {
     if (isAuth) {
       history.push("/cars")
     }
-  }, [isAuth])
+  }, [isAuth]) // eslint-disable-line
 
   const onClickHandler = () => {
     dispatch(login(loginFields))

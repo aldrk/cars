@@ -1,0 +1,9 @@
+.orderWrapper {
+  display: grid;
+  grid-template-columns: 150px 410px 120px;
+  grid-column-gap: 50px;
+
+  .text {
+    font-weight: 700;
+  }
+}

@@ -27,7 +27,7 @@ const App = () => {
         {isAuth && <Route exact path="/cars" component={Cars}/>}
         {isAuth && isAdmin && <Route exact path="/cars/new" component={NewCar}/>}
         {isAuth && isAdmin && <Route exact path="/statistic" component={Statistic}/>}
-        {isAuth && !isAdmin && <Route exact path="/orders" component={Orders}/>}
+        {isAuth && <Route exact path="/orders" component={Orders}/>}
         {isAuth && <Route exact path="/orders/new" component={NewOrder}/>}
 
         {!isAuth && <Route path="*" component={Registration}/>}

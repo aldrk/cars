@@ -1,3 +1,4 @@
+/* eslint import/no-anonymous-default-export: [0, {"allowCallExpression": true}] */
 export default {
   paths: {
     register: "/auth/signin",

@@ -21,7 +21,7 @@ const List = () => {
         <TableHead>
           <TableRow>
             <TableCell>ФИО</TableCell>
-            <TableCell align="right">Заказы</TableCell>
+            <TableCell>Заказы</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -31,12 +31,12 @@ const List = () => {
                 <TableCell component="th" scope="row">
                   {item.client.lastName} {item.client.firstName} {item.client.middleName}
                 </TableCell>
-                <TableCell align="right">
+                <TableCell>
                   {item.orders.map(order => <OrderListItem order={order} />)}
                 </TableCell>
               </TableRow>
             ))
-            : "Нет заказов"
+            : <TableRow><TableCell>Нет заказов</TableCell></TableRow>
           }
         </TableBody>
       </Table>

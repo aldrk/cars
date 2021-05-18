@@ -5,7 +5,6 @@ import {getStatistic} from "../../../store/dispatchers/statistic"
 import Container from "../../blocks/Container"
 import {DateRange} from "react-date-range";
 import './style.css'
-import {useUpdateEffect} from "react-use";
 
 const Statistic = () => {
   const dispatch = useDispatch()
@@ -20,13 +19,13 @@ const Statistic = () => {
 
   useEffect(() => {
     dispatch(getStatistic())
-  }, [])
+  }, []) // eslint-disable-line
 
   useEffect(() => {
     if (date[0].endDate !== date[0].startDate) {
       dispatch(getStatistic(date[0].startDate, date[0].endDate))
     }
-  }, [date[0].endDate])
+  }, [date[0].endDate]) // eslint-disable-line
 
   return (
     <Container>

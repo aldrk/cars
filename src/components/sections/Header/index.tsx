@@ -27,9 +27,9 @@ const Header = () => {
             ? <div className={style.menuWrapper}>
                <Logo />
                 <Link to="/cars">Машины</Link>
-                {isAdmin && <Link to="/statistic">Статистика</Link>}
                 <Link to="/orders">Заказы</Link>
-	             </div>
+                {isAdmin && <Link to="/statistic">Статистика</Link>}
+            </div>
             : <Logo />
           }
           <div>

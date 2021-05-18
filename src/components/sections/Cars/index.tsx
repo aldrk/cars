@@ -1,3 +1,5 @@
+// react-hooks/exhaustive-deps
+
 import React, {useEffect, useState} from 'react'
 import Container from '../../blocks/Container'
 import Filters from './Filters'
@@ -19,10 +21,9 @@ const Cars = () => {
     getCarsList()
   }, [type])
 
-
   useEffect(() => {
     getCarsList()
-  }, [])
+  }, []) // eslint-disable-line
 
   return (
     <Container>
