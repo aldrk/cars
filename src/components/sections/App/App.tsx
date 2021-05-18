@@ -16,8 +16,6 @@ const App = () => {
 
   const isAdmin = role === "admin"
 
-  console.log(isAdmin)
-
   return (
     <div>
       <Header/>

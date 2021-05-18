@@ -22,17 +22,40 @@ export const register = (registerFields: RegisterFields) => (dispatch: Dispatch)
 export const login = (loginFields: LoginFields) => (dispatch: any) => {
   dispatch(actions.loginRequest())
 
-  API.post(config.paths.login, {...loginFields}, {withCredentials: true})
+  API.get(config.paths.isAuth, {withCredentials: true})
     .then(({data}) => {
-      if (data.isSuccess) {
-        dispatch(actions.loginSuccess(data))
-      } else if (data.responseMessage === "Вы уже вошли в систему") {
-        dispatch(getOrders(loginFields.login))
+      if (data) {
+        API.post(config.paths.logOut,{} , {withCredentials: true})
+          .then(({data}) => {
+            if (data.isSuccess) {
+              dispatch(actions.logOut())
+
+              API.post(config.paths.login, {...loginFields}, {withCredentials: true})
+                .then(({data}) => {
+                  if (data.isSuccess) {
+                    dispatch(actions.loginSuccess(data))
+                  } else {
+                    dispatch(actions.loginFailure())
+                  }
+                })
+                .catch(() => dispatch(actions.loginFailure()))
+            } else {
+              dispatch(actions.logOut())
+            }
+          })
+          .catch(() => dispatch(actions.logOut()))
       } else {
-        dispatch(actions.loginFailure())
+        API.post(config.paths.login, {...loginFields}, {withCredentials: true})
+          .then(({data}) => {
+            if (data.isSuccess) {
+              dispatch(actions.loginSuccess(data))
+            } else {
+              dispatch(actions.loginFailure())
+            }
+          })
+          .catch(() => dispatch(actions.loginFailure()))
       }
     })
-    .catch(() => dispatch(actions.loginFailure()))
 }
 
 export const logOut = () => (dispatch: Dispatch) => {

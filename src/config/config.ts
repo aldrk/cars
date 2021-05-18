@@ -2,6 +2,7 @@
 export default {
   paths: {
     register: "/auth/signin",
+    isAuth: "auth/isauthenticated",
     login: "/auth/login",
     logOut: "/auth/logout",
     cars: "/client/getautomodels",
