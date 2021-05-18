@@ -1,30 +1,37 @@
 import React, {useState} from 'react'
 import {Button, Select, TextField, FormControl, InputLabel, MenuItem} from "@material-ui/core"
-import { useHistory } from "react-router-dom"
+import {useHistory} from "react-router-dom"
 import {NewCarFields} from "../../../../store/interfaces/cars"
 import API from "../../../../lib/api"
 import config from "../../../../config/config"
-import { useToasts } from "react-toast-notifications"
+import {useToasts} from "react-toast-notifications"
 
 import style from "./style.module.scss"
 
 const newCar = (newCar: NewCarFields) => {
-  return new Promise<void>((resolve, reject) => {
-    API.post(config.paths.car, {car: {...newCar, EngineVolume: +newCar.EngineVolume}}, {withCredentials: true})
+  return new Promise<any>((resolve, reject) => {
+    API.post(config.paths.car, {
+        car: {
+          ...newCar,
+          EngineVolume: +newCar.EngineVolume,
+          Url: newCar.Url ? newCar.Url : "https://c0.klipartz.com/pngpicture/831/609/gratis-png-caricatura-coche.png"
+        }
+      },
+      {withCredentials: true})
       .then(({data}) => {
-        if (data.isSucces) {
-          resolve()
+        if (data.isSuccess) {
+          resolve(data)
         } else {
-          reject()
+          reject(data)
         }
       })
-      .catch(() => reject())
+      .catch((data) => reject(data))
   })
 }
 
 const NewCar = () => {
   const history = useHistory()
-  const { addToast } = useToasts()
+  const {addToast} = useToasts()
 
   const [carFields, setCarFields] = useState<NewCarFields>({
     Count: 0,
@@ -39,12 +46,17 @@ const NewCar = () => {
 
   const onClickHandler = () => {
     newCar(carFields)
-      .then(() => {
-        addToast('Машина была создана', { appearance: 'success' });
+      .then((data) => {
 
-        history.push("/cars")
+        if (data.isSuccess) {
+          addToast('Машина была создана', {appearance: 'success'});
+
+          history.push("/cars")
+        } else {
+          addToast(data.responseMessage, {appearance: 'error'})
+        }
       })
-      .catch(() => addToast('Произошла ошибка', { appearance: 'error' }))
+      .catch(() => addToast("Произошла ошибка", {appearance: 'error'}))
   }
 
   return (

@@ -1,8 +1,9 @@
-import React from "react"
+import React, {useState} from "react"
 import {Button} from "@material-ui/core"
 import {useHistory} from "react-router-dom"
 import {useSelector} from "react-redux"
 import {State} from "../../../../store/store"
+
 
 const Filters = () => {
   const history = useHistory()
@@ -15,10 +16,9 @@ const Filters = () => {
     history.push("/orders/new")
   }
 
-  console.log(isAdmin)
-
   return (
     <div>
+
       {!isAdmin && <Button onClick={onClickHandler}>Новый заказ</Button>}
     </div>
   )

@@ -3,13 +3,13 @@ import API from "../../lib/api"
 import config from "../../config/config"
 import {Dispatch} from "redux"
 
-export const getStatistic = () => (dispatch: Dispatch) => {
+export const getStatistic = (From?: Date, To?:Date | null) => (dispatch: Dispatch) => {
   dispatch(actions.getStatisticRequest())
 
-  API.post(config.paths.statistic, {}, {withCredentials: true})
+  API.post(config.paths.statistic, {From, To}, {withCredentials: true})
     .then(({data}) => {
       if (data.isSuccess) {
-        dispatch(actions.getStatisticSuccess(data))
+        dispatch(actions.getStatisticSuccess(data.statistics))
       } else {
         dispatch(actions.getStatisticFailure())
       }

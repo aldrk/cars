@@ -1,9 +1,9 @@
 import React, {FC} from "react"
 import {Button, FormControl, InputLabel, MenuItem, Select} from "@material-ui/core"
 import {useHistory} from "react-router-dom"
-import style from "../style.module.scss";
-import {useSelector} from "react-redux";
-import {State} from "../../../../store/store";
+import style from "../style.module.scss"
+import {useSelector} from "react-redux"
+import {State} from "../../../../store/store"
 
 type Props = {
   type: string

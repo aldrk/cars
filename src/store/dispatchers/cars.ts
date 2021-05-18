@@ -8,7 +8,8 @@ export const getCars = (type?: string) => (dispatch: Dispatch) => {
 
   API.post(config.paths.cars, {
     BatchSize: 10,
-    From: 0
+    From: 0,
+    Type: type
   },{withCredentials: true})
     .then(({data}) => {
       if (data.isSuccess) {

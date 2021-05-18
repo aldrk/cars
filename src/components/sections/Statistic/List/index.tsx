@@ -25,16 +25,19 @@ const List = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {items.map((item) => (
-            <TableRow key={item.Client.id}>
-              <TableCell component="th" scope="row">
-                {item.Client.lastName} {item.Client.firstName} {item.Client.middleName}
-              </TableCell>
-              <TableCell align="right">
-                {item.Orders.map(order => <OrderListItem order={order} />)}
-              </TableCell>
-            </TableRow>
-          ))}
+          {items.length > 0
+            ? items.map((item) => (
+              <TableRow key={item.client.id}>
+                <TableCell component="th" scope="row">
+                  {item.client.lastName} {item.client.firstName} {item.client.middleName}
+                </TableCell>
+                <TableCell align="right">
+                  {item.orders.map(order => <OrderListItem order={order} />)}
+                </TableCell>
+              </TableRow>
+            ))
+            : "Нет заказов"
+          }
         </TableBody>
       </Table>
     </TableContainer>

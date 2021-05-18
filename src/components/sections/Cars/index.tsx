@@ -19,6 +19,7 @@ const Cars = () => {
     getCarsList()
   }, [type])
 
+
   useEffect(() => {
     getCarsList()
   }, [])

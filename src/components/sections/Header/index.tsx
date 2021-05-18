@@ -28,7 +28,7 @@ const Header = () => {
                <Logo />
                 <Link to="/cars">Машины</Link>
                 {isAdmin && <Link to="/statistic">Статистика</Link>}
-                {!isAdmin &&<Link to="/orders">Заказы</Link>}
+                <Link to="/orders">Заказы</Link>
 	             </div>
             : <Logo />
           }

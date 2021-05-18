@@ -17,8 +17,6 @@ const Orders = () => {
 
   useEffect(() => {
     dispatch(getOrders())
-
-    if (items.length !== 0) dispatch(getCars())
   }, [])
 
   return (

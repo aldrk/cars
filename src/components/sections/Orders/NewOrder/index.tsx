@@ -11,16 +11,17 @@ import {State} from "../../../../store/store"
 import style from "./style.module.scss"
 
 const newOrder = (newOrder: NewOrderFields) => {
-  return new Promise<void>((resolve, reject) => {
+  return new Promise<any>((resolve, reject) => {
     API.post(config.paths.order, {order: {...newOrder}}, {withCredentials: true})
       .then(({data}) => {
-        if (data.isSucces) {
-          resolve()
+        console.log(data, "func")
+        if (data.isSuccess) {
+          resolve(data)
         } else {
-          reject()
+          reject(data)
         }
       })
-      .catch(() => reject())
+      .catch(({data}) => reject(data))
   })
 }
 
@@ -38,12 +39,12 @@ const NewOrder = () => {
 
   const onClickHandler = () => {
     newOrder(orderFields)
-      .then(() => {
-        addToast('Заказ был создан', { appearance: 'success' });
+      .then((data) => {
+        addToast(data.responseMessage, { appearance: 'success' });
 
         history.push("/orders")
       })
-      .catch(() => addToast('Произошла ошибка', { appearance: 'error' }))
+      .catch(() => addToast("Произошла ошибка", { appearance: 'error' }))
   }
 
   return (
